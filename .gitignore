@@ -2,12 +2,7 @@
 *.tar.*
 *.jar
 *.exe
-*.msi
 *.zip
-*.tgz
-*.log
-*.log.*
-*.sig
-
-pkg/
-src/
+*.7z
+*.ico
+*.png
