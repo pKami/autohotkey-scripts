@@ -9,17 +9,17 @@ Most of the scripts are adopted for usage with Windows, AutoHotkey Unicode v1.x,
 ## Setup
 
 * Install [Autohotkey](http://www.autohotkey.com/)
-  * or with [Chocolatey](https://chocolatey.or): `choco.exe install autohotkey`
 * git clone git@github.com:pKami/autohotkey-scripts.git
 
 ## Scripts
 
-Most of my scripts use Ctrl+Shift+Z as the starting key combination. You're free to re-define that to whatever you need. It was just a habit of mine to have that key combo for scripts, since it doesn't collide or cover up anything I'd use frequently.
+Many of my scripts use Ctrl+Shift+Z as the starting key combination. You're free to re-define that to whatever you need. It was just a habit of mine to have that key combo for scripts, since it doesn't collide or cover up anything I'd use frequently.
 
 File | Function
 -------- |  -----------
-[Filename1.ahk](Filename1.ahk) | Description 1 |
-[Filename2.ahk](Filename2.ahk) | Description 2 |
+[Excel_BoldPartOfCellText.ahk](Excel_BoldPartOfCellText.ahk) | script for automating **bold**ing fragments of cells in Excel |
+[KeyInfoTooltip.ahk](KeyInfoTooltip.ahk) | script that live displays information about pressed keys as a tooltip over the cursor |
+[Filename.ahk](Filename.ahk) | Description |
 TBD
 
 ## Known Issues
