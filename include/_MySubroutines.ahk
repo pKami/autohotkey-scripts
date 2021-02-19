@@ -11,7 +11,24 @@
 ;	#Include _MySubroutines.ahk
 ;
 
+Delay := 100
 Return	; To prevent execution of below subroutines
+
+SlowerMouseClickDelay:
+	Loop 2 {
+		alt := not alt
+		
+		if(alt)
+		{
+			Click down
+		}
+		else
+		{
+			Click up
+		}
+	Sleep, %Delay%
+	}	
+Return
 
 SlowerMouseClick:
 	Loop 2 {
@@ -49,6 +66,28 @@ SlowerMouseClickCoords(x,y) {
 	MouseMove, x, y
 	Gosub SlowerMouseClick
 }
+
+SlowerMouseClickDelay(Delay) {
+	Loop 2 {
+		alt := not alt
+		
+		if(alt)
+		{
+			Click down
+		}
+		else
+		{
+			Click up
+		}
+	Sleep, %Delay%
+	}
+}
+
+SlowerMouseClickDelayCoords(Delay, x, y) {
+	MouseMove, x, y
+	SlowerMouseClickDelay(Delay)
+}
+
 
 ;
 ;	EXAMPLE SUBROUTINE USE & SUBROUTINE TUTORIAL
