@@ -1,12 +1,11 @@
-;
 ; AutoHotkey Version: 1.x
 ; Language:       English
-; Platform:       Win9x/NT
-; Author:         pKami <GITHUBMAIL>
+; Platform:       Windows
+; Author:         pKami (pkami.github.io)
 ;
 ; Script Function:
-;	Template script (you can customize this template by editing "ShellNew\Template.ahk" in your Windows folder)
-;
+;	Repeat a key with delay and key configured in config.ini
+;	Like an AutoClicker, but for keyboard key.
 
 #NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
@@ -14,14 +13,19 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 IniFileName := "config.ini"
 IniSection  := "Settings"
 
+if !FileExist(IniFileName)
+    Gosub, InitIni	; use to create a new instance of config.ini file
 
 StartStopKey := "F2"
 KeyToRepeat := 4
-KeyDelay := 1000			; delay between actions, in ms
+KeyDelay := 1000			; delay between keystrokes, in ms
 
-ActionDelay = 1000
+IniRead, KeyToRepeat, %IniFileName%, %IniSection%, KeyToRepeat, 4
+IniRead, KeyDelay, %IniFileName%, %IniSection%, KeyDelay, 1000
+MsgBox, "KeyToRepeat is: " %KeyToRepeat%
+MsgBox, "KeyDelay is: " %KeyDelay%
 
-; Gosub, InitIni	; use to create a new instance of config.ini file
+ActionDelay = 1000			; script internal delay between actions
 
 F3::
 {
@@ -38,9 +42,9 @@ return
 
 MainLoop:
 	Loop	; MAIN LOOP
-	{	
+	{
 		Sleep, KeyDelay/2	; wait 
-		Send, 4
+		Send, %KeyToRepeat%
 		Sleep, KeyDelay/2	; wait 
 	}
 return
@@ -54,9 +58,9 @@ ValidateParams:
 return
 
 InitIni:	; use to create a new instance of config.ini file
-IniWrite, "F2", %IniFileName%, %IniSection%, "StartStopKey"
-IniWrite, 4,	%IniFileName%, %IniSection%, "KeyToRepeat"
-IniWrite, 4000, %IniFileName%, %IniSection%, "Delay"
+; IniWrite, "F2", %IniFileName%, %IniSection%, StartStopKey
+IniWrite, 2,	%IniFileName%, %IniSection%, KeyToRepeat
+IniWrite, 2000, %IniFileName%, %IniSection%, KeyDelay
 return
 
 ExitScript:
