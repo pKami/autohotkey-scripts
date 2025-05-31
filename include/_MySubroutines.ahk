@@ -11,23 +11,8 @@
 ;	#Include _MySubroutines.ahk
 ;
 
-Delay := 100
-Return	; To prevent execution of below subroutines
 
-SlowerMouseClickDelay:
-	Loop 2 {
-		alt := not alt
-		
-		if(alt)
-		{
-			Click down
-		}
-		else
-		{
-			Click up
-		}
-	Sleep, %Delay%
-	}	
+; To prevent execution of below subroutine
 Return
 
 SlowerMouseClick:
@@ -62,6 +47,22 @@ SlowerMouseClick200:
 	}	
 Return
 
+SlowerMouseClickDelay:
+	Loop 2 {
+		alt := not alt
+		
+		if(alt)
+		{
+			Click down
+		}
+		else
+		{
+			Click up
+		}
+	Sleep, %Delay%
+	}	
+Return
+
 SlowerMouseClickCoords(x,y) {
 	MouseMove, x, y
 	Gosub SlowerMouseClick
@@ -86,6 +87,51 @@ SlowerMouseClickDelay(Delay) {
 SlowerMouseClickDelayCoords(Delay, x, y) {
 	MouseMove, x, y
 	SlowerMouseClickDelay(Delay)
+}
+
+SleepSecondsWithBreak(seconds, ExitKey := "e") {
+	Loop 100
+	{
+		Sleep, seconds * 10
+		if GetKeyState(ExitKey)
+			Return
+	}
+}
+
+SlowerKeypress(Key) {
+	Send, {%Key% down}
+	Sleep, 100
+	Send, {%Key% up}
+}
+
+SlowerKeypressRepeatIntervals(key, repeats, ActionDelayMs := 1000) {
+	Loop %repeats% {
+		Sleep, %ActionDelayMs%
+		SlowerKeypress(key)
+		
+		if GetKeyState(ExitKey)
+			Return
+	}
+}
+
+; Function: ClickCoordinates
+; Params:
+;   coords - an array of arrays, each inner array contains two elements: x and y coordinates
+;   timeoutSec - delay in seconds between clicks
+ClickCoordinates(coords, timeoutSec) {
+    ; CoordMode, Mouse, Screen  ; Use screen coordinates; change to "Window" if needed
+    for index, coord in coords {
+		
+	Send, %index%
+        x := coord[1]
+        y := coord[2]
+        SlowerMouseClickCoords(x, y)
+		
+        SleepSecondsWithBreak(timeoutSec)
+		
+		if GetKeyState(ExitKey)
+			Return
+    }
 }
 
 
